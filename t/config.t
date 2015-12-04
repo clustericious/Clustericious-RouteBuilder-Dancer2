@@ -50,7 +50,6 @@ package ConfigTest::Routes;
 use strict;
 use warnings;
 use Clustericious::RouteBuilder::Dancer2;
-use Clustericious::RouteBuilder::Dancer2::Plugin;
 
 get '/foo' => sub {
   clconfig->foo;

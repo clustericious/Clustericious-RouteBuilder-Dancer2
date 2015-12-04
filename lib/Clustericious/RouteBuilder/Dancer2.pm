@@ -50,8 +50,15 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
     $routes{$app_name} = $caller;
 
     Dancer2->import::into($caller);
-    #require Clustericious::RouteBuilder::Dancer2::Plugin;
-    #Clustericious::RouteBuilder::Dancer2::Plugin->import::into($caller);
+    
+    # OKAY we better find a better way to do this.  But for now...
+    eval qq{
+      package $caller {
+        require Clustericious::RouteBuilder::Dancer2::Plugin;
+        Clustericious::RouteBuilder::Dancer2::Plugin->import::into(\$caller);
+      }
+    };
+    die $@ if $@;
   }
 
   Clustericious::App->_add_route_builder(sub {
