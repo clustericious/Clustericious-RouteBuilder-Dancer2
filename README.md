@@ -25,7 +25,7 @@ as the DSL to build routes.
 
 # CAVEATS
 
-Although the original [Clusteriious::RouteBuilder](https://metacpan.org/pod/Clusteriious::RouteBuilder) allowed you to declare routes
+Although the original [Clustericious::RouteBuilder](https://metacpan.org/pod/Clustericious::RouteBuilder) allowed you to declare routes
 in either the app namespace or `::Routes` under the app namespace, when using this
 route builder you MUST declare your routes in a separate `::Routes` module.  This
 is because the [Dancer2](https://metacpan.org/pod/Dancer2) DSL conflicts with [Clustericious](https://metacpan.org/pod/Clustericious).

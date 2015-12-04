@@ -30,7 +30,7 @@ as the DSL to build routes.
 
 =head1 CAVEATS
 
-Although the original L<Clusteriious::RouteBuilder> allowed you to declare routes
+Although the original L<Clustericious::RouteBuilder> allowed you to declare routes
 in either the app namespace or C<::Routes> under the app namespace, when using this
 route builder you MUST declare your routes in a separate C<::Routes> module.  This
 is because the L<Dancer2> DSL conflicts with L<Clustericious>.
