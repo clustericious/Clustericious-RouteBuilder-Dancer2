@@ -50,10 +50,13 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
     $routes{$app_name} = $caller;
 
     Dancer2->import::into($caller);
+    #require Clustericious::RouteBuilder::Dancer2::Plugin;
+    #Clustericious::RouteBuilder::Dancer2::Plugin->import::into($caller);
   }
 
   Clustericious::App->_add_route_builder(sub {
     my($app) = @_;
+    $Clustericious::RouteBuilder::Dancer2::Plugin::clustericious = $app;
 
     if(my $class = $routes{ref $app})
     {
