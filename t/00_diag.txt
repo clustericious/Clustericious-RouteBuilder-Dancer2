@@ -1,6 +1,7 @@
 Clustericious
 Dancer2
 ExtUtils::MakeMaker
+Import::Into
 Mojolicious::Plugin::MountPSGI
 Test::Clustericious::Cluster
 Test::More

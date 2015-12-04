@@ -37,6 +37,9 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
 
 =cut
 
+  use Dancer2            ();
+  use Clustericious::App ();
+  use Import::Into;
   my %routes;
 
   sub import
@@ -46,24 +49,19 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
     $app_name =~ s{::Routes$}{};
     $routes{$app_name} = $caller;
 
-    require Dancer2;
-    @_ = ('Dancer2');
-    goto \&Dancer2::import;
+    Dancer2->import::into($caller);
   }
 
-  # Requires Clustericious 1.08
-  sub _add_routes
-  {
-    my($class, $app) = @_;
-  
-    # TODO: can we inherit an app in Clustericious?
+  Clustericious::App->_add_route_builder(sub {
+    my($app) = @_;
+
     if(my $class = $routes{ref $app})
     {
       $app->plugin( MountPSGI => {
         '/' => $class->to_app,
       });
     }
-  }
+  });
 }
 
 1;
