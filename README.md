@@ -1,4 +1,4 @@
-# Clustericious::RouteBuilder::Dancer2 [![Build Status](https://secure.travis-ci.org/plicease/Clustericious-RouteBuilder-Dancer2.png)](http://travis-ci.org/plicease/Clustericious-RouteBuilder-Dancer2)
+# Clustericious::RouteBuilder::Dancer2 [![Build Status](https://secure.travis-ci.org/clustericious/Clustericious-RouteBuilder-Dancer2.png)](http://travis-ci.org/clustericious/Clustericious-RouteBuilder-Dancer2)
 
 Build Clustericious routes with Dancer2
 
