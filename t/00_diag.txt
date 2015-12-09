@@ -1,6 +1,6 @@
 Clustericious
 Dancer2
-Dancer2::Plugin
+EV
 ExtUtils::MakeMaker
 Import::Into
 Mojolicious::Plugin::MountPSGI
