@@ -39,6 +39,7 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
 
   use Dancer2            ();
   use Clustericious::App ();
+  use Mojo::Util qw( monkey_patch );
   use Import::Into;
   my %routes;
 
@@ -48,6 +49,18 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
     my $app_name = $caller;
     $app_name =~ s{::Routes$}{};
     $routes{$app_name} = $caller;
+
+    monkey_patch $app_name, startup_route_builder => sub {
+      my($app) = @_;
+      $Clustericious::RouteBuilder::Dancer2::Plugin::clustericious = $app;
+
+      if(my $class = $routes{ref $app})
+      {
+        $app->plugin( MountPSGI => {
+          '/' => $class->to_app,
+        });
+      }
+    };
 
     Dancer2->import::into($caller);
     
@@ -60,18 +73,6 @@ is because the L<Dancer2> DSL conflicts with L<Clustericious>.
     };
     die $@ if $@;
   }
-
-  Clustericious::App->_add_route_builder(sub {
-    my($app) = @_;
-    $Clustericious::RouteBuilder::Dancer2::Plugin::clustericious = $app;
-
-    if(my $class = $routes{ref $app})
-    {
-      $app->plugin( MountPSGI => {
-        '/' => $class->to_app,
-      });
-    }
-  });
 }
 
 1;
